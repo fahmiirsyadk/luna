@@ -1,0 +1,15 @@
+package:
+  name: example-hydrate-counter
+  dependencies:
+    - luna
+    - prelude
+    - effect
+    - node-fs
+    - node-process
+  bundle:
+    platform: browser
+    type: app
+    module: HydrateCounter.Main
+    outfile: app.js
+  run:
+    main: HydrateCounter.PrerenderMain

@@ -1,0 +1,14 @@
+{
+  "private": true,
+  "name": "example-hydrate-counter",
+  "scripts": {
+    "prerender": "pnpm exec spago run",
+    "start": "pnpm exec spago run && pnpm exec spago bundle && serve ."
+  },
+  "devDependencies": {
+    "purescript": "0.15.15",
+    "spago": "^1.0.4",
+    "esbuild": "^0.25.0",
+    "serve": "^14.0.0"
+  }
+}

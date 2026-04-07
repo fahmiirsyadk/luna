@@ -1,0 +1,26 @@
+package:
+  name: example-todo-mvc
+  dependencies:
+    - luna
+    - arrays
+    - bifunctors
+    - const
+    - control
+    - either
+    - foldable-traversable
+    - maybe
+    - prelude
+    - effect
+    - routing
+    - simple-json
+    - transformers
+    - tuples
+    - web-dom
+    - web-html
+    - web-storage
+    - web-uievents
+  bundle:
+    platform: browser
+    type: app
+    module: Todo.Main
+    outfile: app.js

@@ -1,0 +1,47 @@
+package:
+  name: luna
+  dependencies:
+    - aff
+    - arrays
+    - bifunctors
+    - const
+    - control
+    - dom-indexed
+    - effect
+    - either
+    - exceptions
+    - foldable-traversable
+    - foreign
+    - foreign-object
+    - functions
+    - functors
+    - lists
+    - maybe
+    - media-types
+    - newtype
+    - node-fs
+    - nullable
+    - ordered-collections
+    - partial
+    - prelude
+    - refs
+    - safe-coerce
+    - strings
+    - tailrec
+    - transformers
+    - tuples
+    - unsafe-coerce
+    - unsafe-reference
+    - web-dom
+    - web-events
+    - web-html
+    - web-uievents
+    - argonaut-core
+    - argonaut-codecs
+  test:
+    main: Test.Main
+    dependencies: []
+workspace:
+  packageSet:
+    registry: 75.7.0
+  extraPackages: {}

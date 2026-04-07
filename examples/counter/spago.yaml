@@ -1,0 +1,11 @@
+package:
+  name: example-counter
+  dependencies:
+    - luna
+    - prelude
+    - effect
+  bundle:
+    platform: browser
+    type: app
+    module: Counter.Main
+    outfile: app.js

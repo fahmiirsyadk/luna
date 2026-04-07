@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "name": "example-subs",
+  "scripts": {
+    "start": "pnpm exec spago bundle && serve ."
+  },
+  "devDependencies": {
+    "purescript": "0.15.15",
+    "spago": "^1.0.4",
+    "esbuild": "^0.25.0",
+    "serve": "^14.0.0"
+  }
+}

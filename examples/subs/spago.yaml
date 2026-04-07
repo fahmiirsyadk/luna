@@ -1,0 +1,17 @@
+package:
+  name: example-subs
+  dependencies:
+    - luna
+    - arrays
+    - const
+    - foldable-traversable
+    - maybe
+    - prelude
+    - effect
+    - web-events
+    - web-html
+  bundle:
+    platform: browser
+    type: app
+    module: Subs.Main
+    outfile: app.js

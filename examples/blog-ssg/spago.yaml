@@ -1,0 +1,29 @@
+package:
+  name: example-blog-ssg
+  dependencies:
+    - luna
+    - prelude
+    - effect
+    - console
+    - routing
+    - routing-duplex
+    - arrays
+    - maybe
+    - either
+    - foldable-traversable
+    - strings
+    - argonaut-codecs
+    - node-fs
+    - node-path
+    - node-process
+    - tuples
+    - unsafe-coerce
+    - web-dom
+    - web-html
+  bundle:
+    platform: browser
+    type: app
+    module: Blog.Main
+    outfile: dist/app.js
+  run:
+    main: Blog.PrerenderMain

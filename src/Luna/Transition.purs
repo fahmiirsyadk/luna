@@ -1,0 +1,17 @@
+module Luna.Transition
+  ( Transition
+  , purely
+  ) where
+
+import Prelude
+
+import Luna.Batch (Batch)
+
+type Transition m s i =
+  { model ∷ s
+  , effects ∷ Batch m i
+  }
+
+-- | A pure model Transition without effects.
+purely ∷ ∀ f s i. s → Transition f s i
+purely = { model: _, effects: mempty }

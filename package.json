@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=22.8.0"
+  },
+  "scripts": {
+    "build": "pnpm exec spago build -p luna",
+    "build:all": "pnpm exec spago build",
+    "test": "pnpm exec spago test -p luna",
+    "dev:blog": "pnpm --filter example-blog-ssg exec serve dist -l 4173"
+  },
+  "devDependencies": {
+    "purescript": "0.15.15",
+    "spago": "^1.0.4"
+  }
+}

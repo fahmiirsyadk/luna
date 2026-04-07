@@ -1,0 +1,31 @@
+# Dependencies
+/node_modules/
+/.pnpm-store/
+
+# Build outputs
+/output/
+/.spago/
+
+# Example build outputs - ignore compiled/bundled files
+/examples/*/dist/
+/examples/*/app.js
+/examples/*/node_modules/
+
+# PureScript cache
+/.psc*
+/.psa*
+/.psci*
+
+# Editor
+/.vscode/
+.idea/
+
+# Testing
+/.ruff_cache/
+/.coverage/
+
+# Generated content (blog SSG pipeline)
+/examples/blog-ssg/generated/
+
+# Git
+/.github/
