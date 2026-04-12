@@ -103,9 +103,8 @@ checkEmptyAttributeSet attributeSet = do
   unless (Util.isEmptyAttributeSet attributeSet) do
     EEx.throwException 
       $ EEx.error 
-      $ "Expected element to have the attributes "
+      $ "Hydration mismatch: DOM has extra attributes not present in the VDOM snapshot: "
         <> Util.toStringAttributeSet attributeSet
-        <> ", but they were not found"
 
 -- | A `Machine` for reconciling attributes, properties, and event handlers.
 -- | An emitter effect must be provided to respond to events. For example,
@@ -115,12 +114,16 @@ checkEmptyAttributeSet attributeSet = do
 -- | handlers with verifying the consistency of attributes and properties
 -- | during the hydration pass. As such, `renderProp` and `applyProp` must
 -- | be implemented accordingly.
+-- |
+-- | `hydrateAttributesIgnore` removes names from the strict leftover set before the
+-- | final check (default: ignore nothing). Use for tooling-injected `data-*` etc.
 hydrateProp 
   ∷ ∀ a
-  . (a → Effect Unit)
+  . (String → Boolean)
+  → (a → Effect Unit)
   → DOM.Element
   → V.Machine (Array (Prop a)) Unit
-hydrateProp emit el = renderProp
+hydrateProp hydrateAttributesIgnore emit el = renderProp
   where
   renderProp ∷ EFn.EffectFn1 (Array (Prop a)) (Step (Array (Prop a)) Unit)
   renderProp = EFn.mkEffectFn1 \ps1 -> do
@@ -133,6 +136,7 @@ hydrateProp emit el = renderProp
         ps1 
         propToStrKey 
         (Fn.runFn4 hydrateApplyProp attributeSet el emit events)
+    Util.deleteIgnoredAttributeNames hydrateAttributesIgnore attributeSet
     checkEmptyAttributeSet attributeSet
     let
       state :: PropState a

@@ -114,6 +114,7 @@
             "argonaut-core",
             "arrays",
             "bifunctors",
+            "console",
             "const",
             "control",
             "dom-indexed",

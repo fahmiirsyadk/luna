@@ -187,6 +187,19 @@ export function deleteAttributeSet(attributeSet, attributeName) {
   attributeSet.delete(attributeName);
 }
 
+/** Remove any attribute name for which predicate returns true (mutates the Set). */
+export function deleteIgnoredAttributeNamesImpl(predicateFn, attributeSet) {
+  return function() {
+    var names = Array.from(attributeSet);
+    for (var i = 0; i < names.length; i++) {
+      var name = names[i];
+      if (predicateFn(name)) {
+        attributeSet.delete(name);
+      }
+    }
+  };
+}
+
 export function isEmptyAttributeSet(attributeSet) {
   return attributeSet.size === 0;
 }

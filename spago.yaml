@@ -6,6 +6,7 @@ package:
     - bifunctors
     - const
     - control
+    - console
     - dom-indexed
     - effect
     - either

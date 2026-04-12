@@ -28,6 +28,7 @@ module Halogen.VDom.Util
   , getAttribute
   , getAttributeSet
   , deleteAttributeSet
+  , deleteIgnoredAttributeNames
   , isEmptyAttributeSet
   , toStringAttributeSet
   , fullAttributeName
@@ -189,6 +190,14 @@ foreign import data JsSet :: Type -> Type
 foreign import getAttributeSet :: DOM.Element -> JsSet String
 
 foreign import deleteAttributeSet :: EFn.EffectFn2 (JsSet String) String Unit
+
+foreign import deleteIgnoredAttributeNamesImpl :: EFn.EffectFn2 (Fn.Fn1 String Boolean) (JsSet String) Unit
+
+-- | Remove attribute names from the live-DOM set for which the predicate holds (e.g. tooling-only `data-*`).
+-- | Used during hydration before the strict leftover-attribute check.
+deleteIgnoredAttributeNames :: (String -> Boolean) -> JsSet String -> Effect Unit
+deleteIgnoredAttributeNames pred attributeSet =
+  EFn.runEffectFn2 deleteIgnoredAttributeNamesImpl (Fn.mkFn1 pred) attributeSet
 
 foreign import isEmptyAttributeSet :: JsSet String -> Boolean
 

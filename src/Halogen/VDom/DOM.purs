@@ -68,10 +68,12 @@ newtype VDomSpec a w = VDomSpec
 -- | This adds the following functions:
 -- | * `hydrateWidget`, analogous to `buildWidget`.
 -- | * `hydrateAttributes`, analogous to `buildAttributes`.
+-- | * `hydrateAttributesIgnore` — same predicate passed to `hydrateProp` (default strict: `\_ -> false`).
 newtype VDomHydrationSpec a w = VDomHydrationSpec
   { vdomSpec ∷ VDomSpec a w
   , hydrateWidget ∷ VDomHydrationSpec a w → DOM.Node → Machine w DOM.Node
   , hydrateAttributes ∷ DOM.Element → Machine a Unit
+  , hydrateAttributesIgnore ∷ String → Boolean
   }
 
 -- | Starts an initial `VDom` machine by providing a `VDomSpec`.
@@ -194,7 +196,7 @@ buildElem = EFn.mkEffectFn6 \(VDomSpec spec) build ns1 name1 as1 ch1 → do
   pure $ mkStep $ Step node state patchElem haltElem
 
 hydrateElem :: forall a w. VDomHydrator4 (Maybe Namespace) ElemName a (Array (VDom a w)) a w
-hydrateElem = EFn.mkEffectFn8 \currentNode (VDomHydrationSpec { vdomSpec: VDomSpec { document }, hydrateAttributes }) hydrate build ns1 name1 as1 ch1 -> do
+hydrateElem = EFn.mkEffectFn8 \currentNode (VDomHydrationSpec { vdomSpec: VDomSpec { document }, hydrateAttributes, hydrateAttributesIgnore: _ }) hydrate build ns1 name1 as1 ch1 -> do
   currentElement <- Hydrate.checkIsElementNode currentNode
   Hydrate.checkTagNameIsEqualTo ns1 name1 currentElement
 
@@ -337,7 +339,7 @@ buildKeyed = EFn.mkEffectFn6 \(VDomSpec spec) build ns1 name1 as1 ch1 → do
   pure $ mkStep $ Step node state patchKeyed haltKeyed
 
 hydrateKeyed :: forall a w. VDomHydrator4 (Maybe Namespace) ElemName a (Array (Tuple String (VDom a w))) a w
-hydrateKeyed = EFn.mkEffectFn8 \currentNode (VDomHydrationSpec { vdomSpec: VDomSpec { document }, hydrateAttributes }) hydrate build ns1 name1 as1 ch1 -> do
+hydrateKeyed = EFn.mkEffectFn8 \currentNode (VDomHydrationSpec { vdomSpec: VDomSpec { document }, hydrateAttributes, hydrateAttributesIgnore: _ }) hydrate build ns1 name1 as1 ch1 -> do
   currentElement <- Hydrate.checkIsElementNode currentNode
   Hydrate.checkTagNameIsEqualTo ns1 name1 currentElement
 
